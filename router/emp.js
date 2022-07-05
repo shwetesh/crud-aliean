@@ -28,7 +28,6 @@ router.post('/',async(req,res)=>{
         name:req.body.name,
         tech:req.body.tech,
         sub:req.body.sub
-
     })
     try {
         const a1=await alien.save()
@@ -43,6 +42,20 @@ router.delete('/:id',async(req,res)=>{
         const alien=await Alien.findById(req.params.id);
         await alien.delete();
         res.json(alien);
+    }
+    catch(err){
+        res.send("error");
+    }
+})
+
+router.post('/:id',async(req,res)=>{
+    
+    try{
+        const alien=await Alien.findById(req.params.id);
+        const r1=await alien.update({
+            name:req.body.name
+        });
+        res.json(r1);
     }
     catch(err){
         res.send("error");
